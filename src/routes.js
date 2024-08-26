@@ -3,6 +3,7 @@ import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import Adm from "./Pages/Adm/Adm";
 import Home from "./Pages/Home/Home";
+import ChatBot from "./Pages/ChatBot/ChatBot";
 
 export default function Router() {
     return (
@@ -10,6 +11,7 @@ export default function Router() {
             <Route path="/" element={ <Login/> } /> 
             <Route path="/register" element={ <Register/> } /> 
             <Route path="/adm-area" element={ <Adm/> } /> 
+            <Route path="/chat-bot" element={ <ChatBot/>} />
             <Route path="/home" element={ <Home/> } /> 
         </Routes>
     );

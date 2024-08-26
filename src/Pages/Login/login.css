@@ -40,7 +40,6 @@
     border: 1px solid #C1BBBB;
     background: #FFF;
     transition: all ;
-    width: 100%;
     max-width: 450px
 }
 .inputarea:hover{
