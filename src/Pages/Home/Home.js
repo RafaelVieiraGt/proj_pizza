@@ -22,7 +22,7 @@ export default function Home() {
                 toast.error("Erro ao carregar dados!")
             })
         }
-
+        
         getData();
         console.log(pizzas)
         

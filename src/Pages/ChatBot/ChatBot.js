@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaPaperPlane } from "react-icons/fa";
 import robo from "../../Assets/robozinho.png";
 import { toast } from "react-toastify";
@@ -14,7 +14,8 @@ export default function ChatBot() {
     const [isNewPizza, setIsNewPizza] = useState(false);
     const [isRepetirPedido, setIsRepetirPedido] = useState(false);
 
-    const [history, setHistory] = useState([{question: "Qual operação você deseja fazer?", answers: ["Novo pedido", "Repetir pedido", "Sair"]}]);
+    const [history, setHistory] = useState([]);
+    const [dialog, setDialog] = useState([{question: "Qual operação você deseja fazer?", answers: ["Novo pedido", "Repetir pedido", "Sair"]}])
 
     const decisionTree = {
         question: "Qual operação você deseja fazer?",
@@ -34,10 +35,13 @@ export default function ChatBot() {
     const [currentNode, setCurrentNode] = useState(decisionTree);
     const handleAnswer = (answer) => {
         const nextNode = currentNode.answers[answer];
-        console.log(history)
-        console.log(currentNode)
-        if (nextNode === 'undefined') {
-            toast.error("Opção inválida!");
+       // console.log(history)
+        console.log("Resposta: ", answer)
+        console.log("Next node: ",nextNode)
+        console.log("current node: ", currentNode)
+        console.log("Dialog", dialog)
+        if (nextNode ===  undefined) {
+            alert("Opção inválida!");
             return
         }
         
@@ -51,6 +55,7 @@ export default function ChatBot() {
         } else {
             // Caso contrário, navega para o próximo nó da árvore
             setCurrentNode(nextNode);
+            setDialog([...dialog, { question: nextNode.question, answers:Object.keys(nextNode.answers) }])
         }
         
         setHistory([...history, { question: currentNode.question, answers: currentNode.answers }]);
@@ -58,32 +63,45 @@ export default function ChatBot() {
 
     function repetirPedido() {
         alert("Repetir pedido")
-        //setIsRepetirPedido(true)
+        setIsRepetirPedido(true)
     }
 
     function sair() {
+        setDialog([{question: "Qual operação você deseja fazer?", answers: ["Novo pedido", "Repetir pedido", "Sair"]}])
+        setHistory([]);
+        setOption("")
         alert("sair")
     }
 
     function newPedido() {
         alert("new pedido")
-        //setIsNewPizza(true);
+        setIsNewPizza(true);
     }
 
     return(
         <div className="container">
             <div className="dialog">
-                <div className="text-bot">
-                    <img src={robo} className="robo-figure"/>
-                    <div className="text-area" >
-                        <span>enunciado enunciado enunciado</span>
-                    </div>
-                </div>
-                <div className="text-user">
-                    <div className="text-area" >
-                        <span>resposta resposta resposta resposta resposta</span>
-                    </div>
-                </div>
+                {dialog.map((d) => (
+                    <>
+                        <div className="text-bot">
+                            <img src={robo} className="robo-figure"/>
+                            <div className="text-area" >
+                                <span>{d.question}</span>
+                                {d.answers.map((a) => (
+                                    <>
+                                        <span>- {a}</span>
+                                    </>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="text-user">
+                            <div className="text-area-user" >
+                                <span>resposta resposta resposta resposta resposta</span>
+                            </div>
+                        </div>
+                    </>
+                ) )}
+                
                 <NewPizzaForm hidden={!isNewPizza} />
                 <div className="response-field">
                     <input type="text" value={option} onChange={(e) => setOption(e.target.value)} />

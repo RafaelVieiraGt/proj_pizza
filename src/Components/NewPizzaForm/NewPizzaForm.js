@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import api from "../../Service/api";
 import { toast} from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaCartPlus } from "react-icons/fa";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 import "./newPizza.css";
 import "../../Pages/Login/login.css";
@@ -100,6 +102,7 @@ export default function NewPizzaForm(props) {
     return(
         <div id="pizza-form" className="pizza-modal">
                 <form onSubmit={submitPedido}>
+                    <FontAwesomeIcon onClick={() => document.getElementById("pizza-form").setAttribute("class", "pizza-modal-hidden")} className="cancel" icon={faCircleXmark} />
                     <div className="inputs">
                         <div className="inputarea">
                             <label>Pizza</label>
