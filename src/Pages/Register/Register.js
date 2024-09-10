@@ -1,9 +1,11 @@
 import "../Login/login.css"
+import 'react-toastify/dist/ReactToastify.css';
 
-
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import {  useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa";
+import api from "../../Service/api";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Register() {
     const [email, setEmail] = useState("");
@@ -11,6 +13,7 @@ export default function Register() {
     const [nome, setNome] = useState("");
     const [telefone, setTelefone] = useState("");
     const [tipoSenha, setTipoSenha] = useState("password");
+    const navigate = useNavigate();
 
     function showSenha() {
         if(tipoSenha === "password")
@@ -19,10 +22,39 @@ export default function Register() {
             setTipoSenha("password")
     }
 
+    async function register() {
+        if (nome === "" || email === "" || senha === "" || telefone === "")
+            toast.error("todos os campos são obrigatórios!")
+        else {
+            let usuario = {
+                nomeUsuario: nome,
+                email: email,
+                senha: senha,
+                telefone: telefone, 
+            }
+            await api.post('user/register', usuario, {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              })
+            .then((res) => {
+                localStorage.setItem("@userCredential", res.data.nomeUsuario)
+                localStorage.setItem("@active", true)
+                navigate('/home')
+            })
+            .catch((error) => {
+                alert(error)
+                toast.error(error.response.data.message)
+            })
+
+        }
+
+    }
+
         return (
             <div className="container">
                 <div className="input-area">
-                    <form div className="input-box">
+                    <form div className="input-box" onSubmit={() => register()}>
                         <div className="title">
                             <h1>PIZZA</h1>
                             <span>Seja bem vindo! Crie sua conta.</span>
@@ -69,6 +101,7 @@ export default function Register() {
                         </div>
                     </form>
                 </div>
+                <ToastContainer />
             </div>
     );
 }

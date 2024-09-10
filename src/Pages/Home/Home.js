@@ -6,11 +6,12 @@ import "./home.css"
 import { useEffect, useState } from "react";
 import api from "../../Service/api";
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
 
     const [pizzas, setPizzas] = useState([]);
-
+    const navigate = useNavigate();
     useEffect( ()=>{
 
         async function getData() {
@@ -24,13 +25,12 @@ export default function Home() {
         }
         
         getData();
-        console.log(pizzas)
         
     }, [])
 
     return (
         <>
-            <Header name="Rafael" />
+            <Header name={localStorage.getItem("@userCredential")} />
             <body>
                 <div className="container-feed">
                     <div className="feed">
@@ -54,7 +54,7 @@ export default function Home() {
                 <div className="robo-area">
                     <div className="conteudo-robo">
                         <img src={robo} alt="imagem-robo"/>
-                        <button>Faça seu pedido</button> 
+                        <button onClick={() => navigate("/chat-bot")}>Faça seu pedido</button> 
                     </div>     
                 </div>
             </body>
