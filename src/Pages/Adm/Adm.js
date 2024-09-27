@@ -39,13 +39,14 @@ export default function Adm() {
     }
 
     async function cadastraBebida() {
+        console.log()
 
         if (nomeBebida === "" || valorBebida === 0) {
              toast.error("Todos os campos devem ser preenchidos!")
             return
         }
         else {
-            await api.post("/bebida", {
+            await api.post("/bebidas", {
                 bebida: nomeBebida,
                 valorBebida
             }).then(() => {
@@ -58,7 +59,7 @@ export default function Adm() {
 
     return (
        <div className="container-geral">
-            <div className="title">
+            <div className="title-adm">
                 <h1>Área administrativa 🔒</h1>
                 <span>Realize aqui o cadastro de novas pizzas e/ou bebidas ao cardápio!</span>
             </div>

@@ -91,3 +91,51 @@
     scale: 1.1;
 }
 
+.react-confirm-alert-button--confirm {
+    background-color: #fff;
+    color: #000; 
+    transition: all 0.2s;
+  }
+
+  .react-confirm-alert-button--confirm:hover {
+    background-color: #3E8BFF;
+    color: #fff;
+  } 
+  
+  .react-confirm-alert-button--cancel {
+    background-color: #fff;
+    color: #000; 
+    transition: all 0.2s; /* Cor do botão de cancelamento */
+  }
+
+  .react-confirm-alert-button--cancel:hover{
+    background-color: #f44336;
+    color: #fff;
+  }
+
+  .response-field button {
+    margin: 0 10px;
+    border: 0;
+    padding: 8px 12px;
+    font-size: 18px;
+    font-family: "Poppins";
+  }
+
+  .btn-voltar {
+    position: absolute;
+    top: 4%;
+    left: 4%;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    font-family: 'Poppins';
+    font-size: 16px;
+    border: 0;
+    border-radius: 16px;
+    color: #235789;
+    transition: all 0.2s;
+  }
+  .btn-voltar:hover {
+    border: 1px solid #235789;
+  }
+
