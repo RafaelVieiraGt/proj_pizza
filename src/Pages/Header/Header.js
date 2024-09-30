@@ -40,11 +40,11 @@ export default function Header(props) {
     
     return(
         <header>
-            <div className="title">
+            <div className="title-header">
                 <span>Pizza</span>
             </div>
 
-            <div className="title">
+            <div className="title-header">
                 <span>{props.name} 👤</span>
                 { lockVisible ? <FontAwesomeIcon onClick={() => navigate("/adm-area")} size="xl" icon={faLock}/> : <></>}
                 <button onClick={() => sair()}>Sair</button>

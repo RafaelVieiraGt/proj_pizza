@@ -18,12 +18,14 @@ export default function Login() {
             setTipoSenha("password")
     }
 
-    async function autenticate() {
-   
+    async function autenticate(e) {
+        e.preventDefault();
+
         await api.get(`/user/login/${email}/${senha}`)
         .then((res) => {
             localStorage.setItem("@userCredential", res.data.nomeUsuario)
             localStorage.setItem("@active", true)
+            localStorage.setItem("@userId", res.data.codigoUsuario)
             navigate('/home')
         })
         .catch((err) => {
@@ -35,7 +37,7 @@ export default function Login() {
     return (
         <div className="container">
             <div className="input-area">
-                <form div className="input-box" onSubmit={autenticate}>
+                <form div className="input-box" onSubmit={(event) => autenticate(event)}>
                     <div className="title">
                         <h1>PIZZA</h1>
                         <span>Faça o login para continuar!</span>

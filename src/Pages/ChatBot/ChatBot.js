@@ -9,6 +9,8 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import "./chatBot.css"
 import { toast, ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function ChatBot() {
 
@@ -25,10 +27,17 @@ export default function ChatBot() {
         }
     ]);
 
+    const handleButtonClick = () => {
+        setSaiuModal(true)
+        // Outras ações a serem executadas na página
+      };
+
     useEffect(() => {
        function voltarAposFechar() {
-        if (saiuModal)
-            goBack()
+            console.log("saiu modal", saiuModal)
+
+            if (saiuModal)
+                goBack()
        }
 
        voltarAposFechar();
@@ -203,7 +212,7 @@ export default function ChatBot() {
                 ))}
 
 
-                <NewPizzaForm hidden={!isNewPizza} user={localStorage.getItem("@userCredential")} goBack={saiuModalFunction}/>
+                <NewPizzaForm hidden={!isNewPizza} user={localStorage.getItem("@userId")} sair={handleButtonClick}/>
                 <OldPedido hidden={!isRepetirPedido} />
             </div>
             <ToastContainer/>

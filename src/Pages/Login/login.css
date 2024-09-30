@@ -33,6 +33,13 @@
     font-size: 40px;
 }
 
+.title span {
+    text-align: center;
+    font-family: "Poppins";
+    color: #235789;
+    font-size: 22px;
+}
+
 .inputarea{
     padding: 7px 12px;
     display: flex;

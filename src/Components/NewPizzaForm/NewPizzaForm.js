@@ -101,7 +101,7 @@ export default function NewPizzaForm(props) {
             await api.post('pedidos',{
                 valorPedido: valorPedido,
                 informacaoAdicional: observacao,
-                nomeUsuario: props.user,
+                codigoUsuario: props.user,
                 itensPedido: itensPedido
             })
             .then(() => toast.success("Pedido Registrado com sucesso!"))
@@ -110,10 +110,10 @@ export default function NewPizzaForm(props) {
 
     return(
         <div id="pizza-form" className="pizza-modal">
-                <form onSubmit={(event) => submitPedido(event)}>
-                    <FontAwesomeIcon onClick={() => {
+                <form onSubmit={(event) => submitPedido(event)}>  
+                <FontAwesomeIcon onClick={() => {
                         document.getElementById("pizza-form").setAttribute("class", "pizza-modal-hidden")
-                        props.goBack(true)
+                        props.sair()
                         }} className="cancel" icon={faCircleXmark} />
                     <div className="inputs">
                         <div className="inputarea">

@@ -7,20 +7,20 @@ header {
     align-items: center;
     background-color: aliceblue;
 }
-.title {
+.title-header {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 10px;
 }
-.title span{
+.title-header span{
     text-align: center;
     font-family: "Poppins";
     color: #235789;
     font-size: 22px;
 }
-.title button {
+.title-header button {
     margin-left: 10px;
     font-size: 16px;
     border: 0;
@@ -32,12 +32,12 @@ header {
     transition: all 0.2s;
     cursor: pointer;
 }
-.title button:hover {
+.title-header button:hover {
     scale: 1.1;
     border: 1px solid #235789;
 }
 
-.title svg {
+.title-header svg {
     cursor: pointer;
     transition: all 0.2s;
 }
