@@ -84,7 +84,21 @@
     justify-content: center;
     align-items: center;
 }
-
-.btnForm button {
-
-}
+.btn-voltar-home {
+    position: absolute;
+    top: 4%;
+    left: 4%;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    font-family: 'Poppins';
+    font-size: 16px;
+    border: 0;
+    border-radius: 16px;
+    color: #235789;
+    transition: all 0.2s;
+    background: transparent;
+  }
+  .btn-voltar-home:hover {
+    border: 1px solid #235789;
+  }

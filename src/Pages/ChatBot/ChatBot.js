@@ -4,15 +4,16 @@ import OldPedido from '../../Components/OldPedido/OldPedido';
 import robo from "../../Assets/robozinho.png";
 import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import "./chatBot.css"
 import { toast, ToastContainer } from 'react-toastify';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function ChatBot() {
+export default function ChatBot(props) {
 
     const [isNewPizza, setIsNewPizza] = useState(false);
     const [isRepetirPedido, setIsRepetirPedido] = useState(false);
@@ -36,8 +37,20 @@ export default function ChatBot() {
        function voltarAposFechar() {
             console.log("saiu modal", saiuModal)
 
-            if (saiuModal)
-                goBack()
+            if (saiuModal) {
+                setDialog([
+                    {
+                        sender: "bot",
+                        question: "Qual operação você deseja fazer?",
+                        answers: ["Novo pedido", "Repetir pedido", "Voltar"],
+                        indexes: [1, 2, 3]
+                    }
+                ]);
+                
+                setActualAnswer("");
+                setHistory([]);
+                setCurrentNode(decisionTree)
+            }
        }
 
        voltarAposFechar();
@@ -77,6 +90,7 @@ export default function ChatBot() {
 
     // Função para lidar com a resposta do usuário
     function handleAnswer(answer) {
+        setSaiuModal(false);
         const nextNode = currentNode.answers[answer]; // Navega para o próximo nó com base na resposta
         console.log("nextNode", nextNode)
         console.log("Current node", currentNode)
@@ -172,9 +186,11 @@ export default function ChatBot() {
         setSaiuModal(value)
     } 
 
-    return (
+    return props.show ? (
         <div className="container">
-            <Link to="/home" className='btn-voltar'>Voltar</Link>
+            <FontAwesomeIcon onClick={() => {
+                window.location.reload()
+                        }} className="cancel" icon={faCircleXmark} />
             <div className="dialog">
                 {dialog.map((d, index) => (
                     <div key={index}>
@@ -213,9 +229,9 @@ export default function ChatBot() {
 
 
                 <NewPizzaForm hidden={!isNewPizza} user={localStorage.getItem("@userId")} sair={handleButtonClick}/>
-                <OldPedido hidden={!isRepetirPedido} />
+                <OldPedido hidden={!isRepetirPedido} sair={handleButtonClick}/>
             </div>
             <ToastContainer/>
-        </div>
-    );
+        </div>) : (<></>);
+
 }

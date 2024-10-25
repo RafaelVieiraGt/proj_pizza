@@ -1,8 +1,10 @@
 import "./login.css"
+import 'react-toastify/dist/ReactToastify.css';
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa";
 import api from "../../Service/api";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function Login() {
 
@@ -29,6 +31,7 @@ export default function Login() {
             navigate('/home')
         })
         .catch((err) => {
+            toast.error(err.response.data.message)
             localStorage.setItem("@active", false)
             
         })
@@ -67,6 +70,7 @@ export default function Login() {
                     </div>
                 </form>
             </div>
+            <ToastContainer/>
         </div>
     )
 }

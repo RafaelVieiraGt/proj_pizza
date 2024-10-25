@@ -80,6 +80,23 @@ input:focus{
     align-items: center;
     gap: 60px;
 }
+.inputarea select {
+    margin-top: 5px;
+    padding: 6px 10px;
+    border: 0;
+    color: #235789;
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+}
+.inputarea select option {
+    color: #235789;
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+}
 
 .register-btn{
     text-decoration: none;

@@ -49,7 +49,7 @@ export default function Register() {
             navigate('/home') 
             })
             .catch((e) => {
-                toast.error(e.message)
+                toast.error(e.response.data.message)
                 return;
             })
 
